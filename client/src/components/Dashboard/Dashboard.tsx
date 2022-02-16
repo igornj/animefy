@@ -1,38 +1,57 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import useAuth from '../../hooks/useAuth'
+import React, { useEffect, useState, useContext } from 'react'
+//import useAuth from '../../hooks/useAuth'
+import { TokenContext } from '../../context/tokenContext';
+import Login from '../Login/Login';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 
-type Props = {
-    code: string
-}
+// type Props = {
+//     code: string
+// }
 
 type TUser = {
     email?: string,
     image?: string | undefined,
 }
 
-const spotifyApi = new SpotifyWebApi({
-    clientId: "d76d730f48874bc0ac6119312471f2fd",
-})
-
-
-const Dashboard: React.FC<Props> = (code) => {
+const Dashboard: React.FC = () => {
 
     const [user, setUser] = useState<TUser>({});
     const [playlistImg, setPlaylistImg] = useState<string | undefined>();
-    console.log(user);
+    const { accessToken, refreshToken, expiresIn } = useContext(TokenContext);
 
 
+    const spotifyApi = new SpotifyWebApi({
+        accessToken: accessToken,
+    });
 
-    const codeFromAuthURL = code.code;
-    const accessToken = useAuth(codeFromAuthURL);
+
+    // const codeFromAuthURL = code.code;
+    // const accessToken = useAuth(codeFromAuthURL);
 
 
     useEffect(() => {
-        if (!accessToken) return
-        spotifyApi.setAccessToken(accessToken)
+        if (!accessToken) return;
+
+        spotifyApi.setAccessToken(accessToken);
+
+        if (expiresIn === 0) {
+            spotifyApi.refreshAccessToken().then(
+                function (data) {
+                    console.log('The access token has been refreshed!');
+
+                    // Save the access token so that it's used in future calls
+                    spotifyApi.setAccessToken(data.body['access_token']);
+                },
+                function (err) {
+                    console.log('Could not refresh access token', err);
+                }
+            );
+        }
+
+
 
         // spotifyApi.getMe()
         //     .then(function (data) {
@@ -63,16 +82,19 @@ const Dashboard: React.FC<Props> = (code) => {
         //     }, function (err) {
         //         console.log('Something went wrong!', err);
         //     });
-    }, [accessToken])
+    }, [accessToken, expiresIn]);
 
 
     return (
-        <div>
-            dash
-            {/* {user.email}
-            <img src={user.image} alt="user" /> */}
-            <img src={playlistImg} alt="user" />
-        </div>
+        <>
+            {accessToken ? <div>
+                dash
+                {/* {user.email}
+                <img src={user.image} alt="user" /> */}
+                <img src={playlistImg} alt="user" />
+            </div> : <Login />}
+        </>
+
     )
 }
 
