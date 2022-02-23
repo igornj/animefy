@@ -10,7 +10,7 @@ const Login: React.FC = () => {
   //?code=AQAJmD123Ijeg8FWHfdn4VvTJgRS6YwXGIX5JTJ3T9S2hUEwnWfQU9BraE5qJDpetD19jotyp6VqWIJ-cqCwn7d2Qp0jA8TvoOsgJH3iwWdCZuC5AlEkKUFrlKBRQ8aDH83r1prOArAKwYdkfGeAlVPGfRoqkfEtvLDMqjvkDrAUBVlD06c_Vff2RVqhzpv2k6fo7n275OZ48BMyCvDqOFt9Hp3FPtbCSth3aWNkG2h6S9II4PAD-VY_AfqVE0a-ccFx3PoZxlGScwl768Y6XQ_mjUzyxaMH03pKO3XIT8uTR68sdG5aL6KbaeC-FoiME212xu7Z_cjIDTDQGXs6v5NQjn8dAxrKelcxUBuCoDtfRTcZvi3j8Es&state=aqASTOBUmSUm2FBA
 
   useEffect(() => {
-    axios.get('http://localhost:3001/')
+    axios.get('http://localhost:3001/login')
       .then(res => {
         setauthURL(res.data.authurl);
       }).catch(e => console.log(e));

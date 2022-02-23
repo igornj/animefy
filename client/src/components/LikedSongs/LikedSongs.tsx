@@ -1,0 +1,61 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react'
+import SpotifyWebApi from 'spotify-web-api-node';
+
+
+type TData = {
+    name?: string | undefined,
+    image?: string | undefined,
+    //images?: string | undefined,
+    images?: { url: string | undefined; }
+    description?: string | undefined,
+    track?: any,
+    added_at?: string | undefined,
+}
+
+const LikedSongs = ({ accessToken }: any) => {
+    const [likedSongsData, setlikedSongsData] = useState<Array<TData> | any>([]);
+    console.log(likedSongsData);
+
+    const spotifyApi = new SpotifyWebApi({
+        clientId: 'd76d730f48874bc0ac6119312471f2fd',
+    });
+
+    useEffect(() => {
+        if (!accessToken) return;
+        spotifyApi.setAccessToken(accessToken);
+
+        spotifyApi.getMySavedTracks({
+            limit: 5,
+            offset: 1
+        })
+            .then(function (data) {
+                console.log('Saved tracks', data.body);
+                setlikedSongsData(data.body.items)
+            }, function (err) {
+                console.log('Something went wrong!', err);
+            });
+
+    }, [accessToken]);
+
+
+
+
+
+
+    return (
+        <div>
+            {likedSongsData?.map(data => {
+                return (
+                    <>
+                        <h1>{data?.track.name}</h1>
+                        <p>{data?.track.artists[0].name}</p>
+                        {/* <img key={data.added_at} src={data.images[0].url} alt="playlistinfo" /> */}
+                    </>
+                )
+            })}
+        </div>
+    )
+}
+
+export default LikedSongs;

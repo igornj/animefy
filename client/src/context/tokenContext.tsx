@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState } from 'react';
-import { code } from '../App';
+//import { code } from '../App';
 import axios from 'axios';
 
 type TokenContextType = {
@@ -10,6 +12,8 @@ type TokenContextType = {
 }
 
 export const TokenContext = createContext<TokenContextType | any>(null);
+const code = new URLSearchParams(window.location.search).get("code") as string
+
 
 
 export const TokenContextProvider: React.FC = ({ children }) => {
@@ -18,23 +22,54 @@ export const TokenContextProvider: React.FC = ({ children }) => {
     const [expiresIn, setExpiresIn] = useState<TokenContextType>();
 
     //erro ta aqui
-    useEffect(() => {
-        axios
-            .post("http://localhost:3001/login", {
-                code,
-            })
-            .then(res => {
-                setAccessToken(res.data.accessToken)
-                setRefreshToken(res.data.refreshToken)
-                setExpiresIn(res.data.expiresIn)
-                //window.history.pushState({}, null, "/") 
-            })
-            .catch((e) => {
-                console.log(e);
-                //window.location.href = "/";
-            })
 
-    }, [accessToken]);
+    if (code) {
+        useEffect(() => {
+            axios
+                .post("http://localhost:3001/", {
+                    code,
+                })
+                .then(res => {
+                    setAccessToken(res.data.accessToken)
+                    setRefreshToken(res.data.refreshToken)
+                    setExpiresIn(res.data.expiresIn)
+                    //window.history.pushState({}, null, "/") 
+                })
+                .catch((e) => {
+                    console.log(e);
+                    //window.location.href = "/";
+                });
+        }, [accessToken, refreshToken, expiresIn]);
+    } else {
+        console.log('não tenho código no context');
+    }
+
+
+
+
+
+
+    // useEffect(() => {
+    //     if (!refreshToken || !expiresIn) return
+    //     const interval = setInterval(() => {
+    //         axios
+    //             .post("http://localhost:3001/refresh", {
+    //                 refreshToken,
+    //             })
+    //             .then(res => {
+    //                 setAccessToken(res.data.accessToken)
+    //                 setExpiresIn(res.data.expiresIn)
+    //             })
+    //             .catch((err: any) => {
+    //                 //window.location = "/"
+    //                 console.log(err);
+    //             })
+    //     }, (expiresIn - 60) * 1000)
+
+    //     return () => clearInterval(interval)
+    // }, [refreshToken, expiresIn])
+
+
 
 
 
