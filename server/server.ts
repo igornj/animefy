@@ -29,6 +29,9 @@ app.get('/login', (req: any, res: any) => {
         'user-read-currently-playing',
         'user-library-read',
         'user-library-modify',
+        'streaming',
+        'user-library-read',
+        'user-library-modify',
     ];
 
     const state = process.env.STATE;

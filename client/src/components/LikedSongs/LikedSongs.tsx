@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
+//import { useDispatch } from 'react-redux'
 import SpotifyWebApi from 'spotify-web-api-node';
 
 
@@ -15,6 +16,9 @@ type TData = {
 
 const LikedSongs = ({ accessToken }: any) => {
     const [likedSongsData, setlikedSongsData] = useState<Array<TData> | any>([]);
+
+    //const dispatch = useDispatch();
+
     console.log(likedSongsData);
 
     const spotifyApi = new SpotifyWebApi({
@@ -31,6 +35,7 @@ const LikedSongs = ({ accessToken }: any) => {
         })
             .then(function (data) {
                 console.log('Saved tracks', data.body);
+
                 setlikedSongsData(data.body.items)
             }, function (err) {
                 console.log('Something went wrong!', err);
@@ -41,6 +46,10 @@ const LikedSongs = ({ accessToken }: any) => {
 
 
 
+    // const grabUri = (uri: string): any => {
+    //     dispatch(uri);
+    // } onClick={grabUri(data.track.uri)}
+
 
 
     return (
@@ -48,8 +57,8 @@ const LikedSongs = ({ accessToken }: any) => {
             {likedSongsData?.map(data => {
                 return (
                     <>
-                        <h1>{data?.track.name}</h1>
-                        <p>{data?.track.artists[0].name}</p>
+                        <h1 key={'1'}>{data?.track.name}</h1>
+                        <p key={'2'}>{data?.track.artists[0].name}</p>
                         {/* <img key={data.added_at} src={data.images[0].url} alt="playlistinfo" /> */}
                     </>
                 )

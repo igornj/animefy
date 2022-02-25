@@ -9,6 +9,7 @@ import useAuth from '../../hooks/useAuth'
 import UserProfile from '../UserProfile/UserProfile';
 import Playlist from '../Playlist/Playlist';
 import LikedSongs from '../LikedSongs/LikedSongs';
+import Player from '../Player/Player';
 
 
 export const code = new URLSearchParams(window.location.search).get("code") as string
@@ -16,8 +17,6 @@ export const code = new URLSearchParams(window.location.search).get("code") as s
 const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const accessToken = useAuth();
-
-
 
     useEffect(() => {
         const spotifyApi = new SpotifyWebApi({
@@ -35,6 +34,7 @@ const Dashboard: React.FC = () => {
             <UserProfile accessToken={accessToken} />
             <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} />
+            <Player accessToken={accessToken} />
         </div>
     )
 }
