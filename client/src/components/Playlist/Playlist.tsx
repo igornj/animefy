@@ -19,8 +19,6 @@ const Playlist = ({ accessToken }: any) => {
     //const [likedSongsData, setlikedSongsData] = useState<Array<TData> | undefined>([]);
     //const accessToken = useAuth();
 
-    console.log(playlistData);
-
     const spotifyApi = new SpotifyWebApi({
         clientId: 'd76d730f48874bc0ac6119312471f2fd',
     });

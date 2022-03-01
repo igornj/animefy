@@ -64,9 +64,6 @@ app.post("/", (req: Request, res: Response) => {
                 refreshToken: data.body.refresh_token,
                 expiresIn: data.body.expires_in,
             })
-
-            spotifyApi.setAccessToken(data.body['access_token']);
-            spotifyApi.setRefreshToken(data.body['refresh_token']);
         })
         .catch((err: any) => {
             console.log(err);

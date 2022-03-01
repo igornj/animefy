@@ -19,8 +19,6 @@ const LikedSongs = ({ accessToken }: any) => {
 
     //const dispatch = useDispatch();
 
-    console.log(likedSongsData);
-
     const spotifyApi = new SpotifyWebApi({
         clientId: 'd76d730f48874bc0ac6119312471f2fd',
     });
