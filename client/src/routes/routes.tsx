@@ -15,9 +15,9 @@ const Router: React.FC = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login />} />
-                {/* <Route path="/" element={<PrivateRoutes />} /> */}
-                <Route path="/" element={<Dashboard />} />
-                <Route path="*" element={<Page404 />} />
+                <Route path="/" element={<PrivateRoutes />} />
+                {/* <Route path="/" element={<Dashboard />} /> */}
+                {/* <Route path="*" element={<Page404 />} /> */}
             </Routes>
         </BrowserRouter>
     )

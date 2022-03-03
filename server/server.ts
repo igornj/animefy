@@ -45,8 +45,6 @@ app.get('/login', (req: any, res: any) => {
 
 
 app.post("/", (req: Request, res: Response) => {
-    //Here we create the tokens using the code genarated in the moment the user logged in
-    //const code = req.body.codeFromAuthURL as string;
     const code = req.body.code;
 
     const spotifyApi = new SpotifyWebApi({

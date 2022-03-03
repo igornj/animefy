@@ -12,6 +12,10 @@ type TUser = {
     display_name?: string | undefined,
 }
 
+const spotifyApi = new SpotifyWebApi({
+    clientId: 'd76d730f48874bc0ac6119312471f2fd',
+});
+
 const UserProfile = ({ accessToken }: any) => {
     const [user, setUser] = useState<TUser>({});
     //const accessToken = useAuth();
@@ -21,16 +25,8 @@ const UserProfile = ({ accessToken }: any) => {
     // }
 
     useEffect(() => {
-        // const spotifyApi = new SpotifyWebApi({
-        //     accessToken: accessToken,
-        // });
-        const spotifyApi = new SpotifyWebApi({
-            clientId: 'd76d730f48874bc0ac6119312471f2fd',
-        });
-
         if (!accessToken) return;
         spotifyApi.setAccessToken(accessToken);
-
 
         spotifyApi.getMe()
             .then(function (data) {

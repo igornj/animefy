@@ -8,7 +8,7 @@ import { code } from '../components/Dashboard/Dashboard';
 
 
 const useAuth = (): string | undefined => {
-    const [accessToken, setAccessToken] = useState<string | undefined>()
+    const [accessToken, setAccessToken] = useState<any | undefined>()
     const [refreshToken, setRefreshToken] = useState<string | undefined>()
     const [expiresIn, setExpiresIn] = useState<number | undefined>()
 
@@ -55,7 +55,7 @@ const useAuth = (): string | undefined => {
 
         return () => clearInterval(interval)
     }, [refreshToken, expiresIn])
-
+    
     return accessToken;
 }
 

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-node';
-
+import { Navigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'
+import { DataContext } from '../../context/dataContext';
 
 //Components
 import UserProfile from '../UserProfile/UserProfile';
@@ -22,27 +23,41 @@ import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
 
 export const code = new URLSearchParams(window.location.search).get("code") as string
 
+const spotifyApi = new SpotifyWebApi({
+    clientId: 'd76d730f48874bc0ac6119312471f2fd',
+});
+
 const Dashboard: React.FC = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any>([]);
     const [playingTrack, setPlayingTrack] = useState<any>();
-
-    //const accessToken = useAuth();
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = useAuth() as string;
+    const authUrl = useContext(DataContext) as string;
 
     const chooseTrack = (track: any) => {
         setPlayingTrack(track);
         setSearch("");
     }
 
+    
     useEffect(() => {
-        const spotifyApi = new SpotifyWebApi({
-            clientId: 'd76d730f48874bc0ac6119312471f2fd',
-        });
+        if (performance.navigation.type === 1) {
+            window.location.replace(authUrl);
+        }
+    }, [authUrl]);
 
-        if (!accessToken) return;
+    useEffect(() => {
+        if (!accessToken) {
+            <Navigate to="/login" />
+        }
 
         spotifyApi.setAccessToken(accessToken);
+    }, [accessToken]);
+
+
+    useEffect(() => {
+        if (!search) return;
+        if (!accessToken) return;
 
         spotifyApi.searchTracks(search, { limit: 5, offset: 1 })
             .then(function (data) {
@@ -62,8 +77,10 @@ const Dashboard: React.FC = () => {
                 console.error(err);
             });
 
-
     }, [accessToken, search]);
+
+
+
 
 
     return (

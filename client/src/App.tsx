@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import Router from './routes/routes';
-import { store } from './features/store';
-//import { Provider } from 'react-redux'
+import { DataContextProvider } from './context/dataContext';
 
 const App: React.FC = () => {
   return (
 
     <>
-      <Router />
+      <DataContextProvider>
+        <Router />
+      </DataContextProvider>
     </>
 
   );
