@@ -11,6 +11,7 @@ import Playlist from '../Playlist/Playlist';
 import LikedSongs from '../LikedSongs/LikedSongs';
 import Player from '../Player/Player';
 import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
+import AnimeScenary from '../AnimeScenary/AnimeScenary';
 
 // type TData = {
 //     artist: string,
@@ -39,7 +40,7 @@ const Dashboard: React.FC = () => {
         setSearch("");
     }
 
-    
+
     useEffect(() => {
         if (performance.navigation.type === 1) {
             window.location.replace(authUrl);
@@ -50,7 +51,6 @@ const Dashboard: React.FC = () => {
         if (!accessToken) {
             <Navigate to="/login" />
         }
-
         spotifyApi.setAccessToken(accessToken);
     }, [accessToken]);
 
@@ -102,6 +102,7 @@ const Dashboard: React.FC = () => {
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
             <Player accessToken={accessToken} uri={playingTrack?.uri} searchResults={searchResults} />
+            <AnimeScenary />
         </div>
     )
 }
