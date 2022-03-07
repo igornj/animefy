@@ -23,7 +23,7 @@ const AnimeScenary = () => {
 
     return (
         <div>
-            <img src={searchResults[10].url} alt="gif" /> 
+            <img src={searchResults[10].url} style={{width: '100%', height: '100%'}}alt="gif" /> 
         </div>
     )
 }
