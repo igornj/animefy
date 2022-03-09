@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { DataContext } from '../../context/dataContext';
 const giphy = require('giphy-api')();
 
 const AnimeScenary = () => {
-
-    const [searchResults, setsearchResults] = useState<any[]>([])
+    const [searchResults, setsearchResults] = useState<any[]>([]);
+    const [randomNumber, setRandomNumber] = useState<number>(0);
+    const { musicChanged } = useContext(DataContext);
 
     useEffect(() => {
         giphy.search('anime aesthetic', function (err: any, res: any) {
-            //console.log(res);
-            setsearchResults(res.data.map(gif => {
+            console.log(res);
+            setsearchResults(res.data.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
                 return {
                     url: gif.images.original.url,
                     id: gif.id
@@ -19,11 +21,18 @@ const AnimeScenary = () => {
 
     }, []);
 
-    console.log(searchResults);
+    useEffect(() =>{
+        setRandomNumber(randomizer());
+    },[musicChanged]);
+
+
+    const randomizer = (min = 0, max = 25) : number => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
 
     return (
         <div>
-            <img src={searchResults[10].url} style={{width: '100%', height: '100%'}}alt="gif" /> 
+            <img key="dale" src={searchResults[randomNumber]} style={{ width: '100%', height: '100%' }} alt="gif" />
         </div>
     )
 }

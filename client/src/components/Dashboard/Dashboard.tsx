@@ -33,12 +33,21 @@ const Dashboard: React.FC = () => {
     const [searchResults, setSearchResults] = useState<any>([]);
     const [playingTrack, setPlayingTrack] = useState<any>();
     const accessToken = useAuth() as string;
-    const authUrl = useContext(DataContext) as string;
+    const { authUrl } = useContext(DataContext);
+    const searchUris: string[] = [];
 
     const chooseTrack = (track: any) => {
         setPlayingTrack(track);
         setSearch("");
     }
+
+
+    // useEffect(() => {
+    //     searchResults.map((music: string[] | any) => {
+    //         return searchUris.push(music.uri)
+    //     })
+    // }, [searchResults, searchUris])
+
 
 
     useEffect(() => {
@@ -77,6 +86,19 @@ const Dashboard: React.FC = () => {
                 console.error(err);
             });
 
+
+        // spotifyApi.getMyCurrentPlaybackState()
+        // .then(function(data) {
+        // // Output items
+        // if (data.body && data.body.is_playing) {
+        //     console.log("User is currently playing something!");
+        // } else {
+        //     console.log("User is not playing anything, or doing so in private.");
+        // }
+        // }, function(err) {
+        // console.log('Something went wrong!', err);
+        // });
+
     }, [accessToken, search]);
 
 
@@ -101,7 +123,7 @@ const Dashboard: React.FC = () => {
 
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
-            <Player accessToken={accessToken} uri={playingTrack?.uri} searchResults={searchResults} />
+            <Player accessToken={accessToken} uri={playingTrack?.uri} searchUris={searchUris} />
             <AnimeScenary />
         </div>
     )
