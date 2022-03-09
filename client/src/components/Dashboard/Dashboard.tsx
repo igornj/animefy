@@ -42,11 +42,11 @@ const Dashboard: React.FC = () => {
     }
 
 
-    // useEffect(() => {
-    //     searchResults.map((music: string[] | any) => {
-    //         return searchUris.push(music.uri)
-    //     })
-    // }, [searchResults, searchUris])
+    useEffect(() => {
+        searchResults.map((music: string[] | any) => {
+            return searchUris.push(music.uri)
+        })
+    }, [search, searchResults, searchUris]);
 
 
 
@@ -70,7 +70,6 @@ const Dashboard: React.FC = () => {
 
         spotifyApi.searchTracks(search, { limit: 5, offset: 1 })
             .then(function (data) {
-                console.log('Search by', search, data.body);
                 setSearchResults(
                     data.body.tracks.items.map(track => {
                         return {
@@ -123,7 +122,7 @@ const Dashboard: React.FC = () => {
 
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
-            <Player accessToken={accessToken} uri={playingTrack?.uri} searchUris={searchUris} />
+            <Player accessToken={accessToken} uri={playingTrack} searchUris={searchUris} />
             <AnimeScenary />
         </div>
     )

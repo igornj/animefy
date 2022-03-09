@@ -8,7 +8,7 @@ type props = {
 const TrackSearchResult = ({ track, chooseTrack }: props) => {
 
     function handlePlay() {
-        chooseTrack(track)
+        chooseTrack(track.uri)
     }
 
     return (

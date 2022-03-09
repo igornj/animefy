@@ -9,7 +9,7 @@ const AnimeScenary = () => {
 
     useEffect(() => {
         giphy.search('anime aesthetic', function (err: any, res: any) {
-            console.log(res);
+            //console.log(res);
             setsearchResults(res.data.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
                 return {
                     url: gif.images.original.url,

@@ -6,28 +6,26 @@ import { DataContext } from '../../context/dataContext';
 function Player({ accessToken, uri, searchUris }: any) {
     const [play, setPlay] = useState<boolean>(false);
     const { musicChanged, setmusicChanged } = useContext(DataContext);
-    const [uris, setUris] = useState<any[]>(searchUris);
-
-    // searchResults.map((el: any) => {
-    //     return setUris(el.uri);
-    // });
-
-    // console.log(uris);
-
-    // // useEffect(() => {
-    // //     if (searchResults) {
+    const [urisPlaylist, seturisPlaylist] = useState<string | string[]>([]);
+    // console.log('search uris aqui irmão: ', searchUris);
+    // console.log('uri aqui irmão: ', uri);
 
 
-    // //         const searchArray = uris.filter((value: string): boolean => {
-    // //             return value !== uri;
-    // //         })
+    const removeDuplicates = (searchUris: any): [] => {
+        return searchUris.filter((item: string,
+            index: number) => searchUris.indexOf(item) === index);
+    }
 
-    // //         console.log(searchArray);
-    // //     }
 
-    // //     return
-    // // }, [])
+    useEffect(() => {
+        if (uri !== undefined) {
+            searchUris.unshift(uri);
+            seturisPlaylist(searchUris);
+            removeDuplicates(searchUris);
+        }
+    }, [uri, searchUris]);
 
+    console.log('uris playlist variable', urisPlaylist);
 
     useEffect(() => {
         setPlay(true);
@@ -36,16 +34,12 @@ function Player({ accessToken, uri, searchUris }: any) {
 
     if (!accessToken) return null;
 
-    console.log('musicas que chegaram pra o play', uris)
-
-
-
 
     return (
         <>
             <SpotifyPlayer
                 token={accessToken}
-                uris={[uris]}
+                uris={uri}
                 callback={state => {
                     if (!state.isPlaying) setPlay(false)
                 }}
