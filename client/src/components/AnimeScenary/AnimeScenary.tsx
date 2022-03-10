@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react';
+import styled from 'styled-components';
 import { DataContext } from '../../context/dataContext';
 const giphy = require('giphy-api')();
 
@@ -21,20 +22,33 @@ const AnimeScenary = () => {
 
     }, []);
 
-    useEffect(() =>{
+    useEffect(() => {
         setRandomNumber(randomizer());
-    },[musicChanged]);
+    }, [musicChanged]);
 
 
-    const randomizer = (min = 0, max = 25) : number => {
+    const randomizer = (min = 0, max = 25): number => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
     return (
-        <div>
-            <img key="dale" src={searchResults[randomNumber]} style={{ width: '100%', height: '100%' }} alt="gif" />
-        </div>
+        <AnimeScenaryContainer>
+            <img src={searchResults[randomNumber]?.url} alt="gif" />
+        </AnimeScenaryContainer>
     )
 }
 
-export default AnimeScenary
+const AnimeScenaryContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+ 
+    img{
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+`;
+
+export default AnimeScenary;

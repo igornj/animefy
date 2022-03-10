@@ -52,7 +52,7 @@ const LikedSongs = ({ accessToken }: any) => {
 
     return (
         <div>
-            {likedSongsData?.map(data => {
+            {likedSongsData?.map((data: { track: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; artists: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined; }[]; }; }) => {
                 return (
                     <>
                         <h1 key={'1'}>{data?.track.name}</h1>

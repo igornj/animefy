@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { Navigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'
@@ -68,10 +69,10 @@ const Dashboard: React.FC = () => {
         if (!search) return;
         if (!accessToken) return;
 
-        spotifyApi.searchTracks(search, { limit: 5, offset: 1 })
+        spotifyApi.searchTracks(search, { limit: 10, offset: 1 })
             .then(function (data) {
                 setSearchResults(
-                    data.body.tracks.items.map(track => {
+                    data?.body?.tracks?.items.map(track => {
                         return {
                             artist: track.artists[0].name,
                             title: track.name,
@@ -105,27 +106,78 @@ const Dashboard: React.FC = () => {
 
 
     return (
-        <div>
+        <DashboardContainer>
             <UserProfile accessToken={accessToken} />
-            <form>
+            <SearchContainer>
                 <input type="search" placeholder='Search a song' value={search} onChange={(e) => setSearch(e.target.value)} />
-            </form>
+                <Tracks>
+                    {searchResults.map((track: any) => (
+                        <TrackSearchResult
+                            track={track}
+                            key={track.uri}
+                            chooseTrack={chooseTrack}
+                        />
+                    ))}
+                </Tracks>
+            </SearchContainer>
             <div>
-                {searchResults.map((track: any) => (
-                    <TrackSearchResult
-                        track={track}
-                        key={track.uri}
-                        chooseTrack={chooseTrack}
-                    />
-                ))}
+
             </div>
 
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
-            <Player accessToken={accessToken} uri={playingTrack} searchUris={searchUris} />
             <AnimeScenary />
-        </div>
+            <Player accessToken={accessToken} uri={playingTrack} searchUris={searchUris} />
+        </DashboardContainer>
     )
 }
 
-export default Dashboard
+
+const DashboardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+`;
+
+const SearchContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    margin-bottom: 2rem;
+    height: 75vh;
+    
+
+    input {
+         border-radius: 15px;
+         border: none;
+         outline: none;
+         width: 60%;
+         height: 40px;
+         margin: 2rem 0 2rem 0;
+         padding: 20px;
+         background: #2C2C2C;
+    }
+     
+    input::placeholder{
+        color: #585858;
+    }
+
+    input, select, textarea{
+         color: #7D7D7D;
+    }   
+ 
+`;
+
+const Tracks = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100vw;
+    height: 60vh;
+    overflow-y: scroll
+`;
+
+export default Dashboard;

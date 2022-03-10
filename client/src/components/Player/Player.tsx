@@ -6,26 +6,27 @@ import { DataContext } from '../../context/dataContext';
 function Player({ accessToken, uri, searchUris }: any) {
     const [play, setPlay] = useState<boolean>(false);
     const { musicChanged, setmusicChanged } = useContext(DataContext);
-    const [urisPlaylist, seturisPlaylist] = useState<string | string[]>([]);
+    //const [urisPlaylist, seturisPlaylist] = useState<string | string[]>([]);
     // console.log('search uris aqui irmão: ', searchUris);
     // console.log('uri aqui irmão: ', uri);
+    //console.log('uris playlist variable', urisPlaylist);
 
 
-    const removeDuplicates = (searchUris: any): [] => {
-        return searchUris.filter((item: string,
-            index: number) => searchUris.indexOf(item) === index);
-    }
+    // const removeDuplicates = (searchUris: any): [] => {
+    //     return searchUris.filter((item: string,
+    //         index: number) => searchUris.indexOf(item) === index);
+    // }
 
 
-    useEffect(() => {
-        if (uri !== undefined) {
-            searchUris.unshift(uri);
-            seturisPlaylist(searchUris);
-            removeDuplicates(searchUris);
-        }
-    }, [uri, searchUris]);
+    // useEffect(() => {
+    //     if (uri !== undefined) {
+    //         searchUris.unshift(uri);
+    //         seturisPlaylist(searchUris);
+    //         removeDuplicates(searchUris);
+    //     }
+    // }, [uri, searchUris]);
 
-    console.log('uris playlist variable', urisPlaylist);
+
 
     useEffect(() => {
         setPlay(true);
@@ -46,6 +47,15 @@ function Player({ accessToken, uri, searchUris }: any) {
                 play={play}
                 showSaveIcon={true}
                 initialVolume={0.1}
+                styles={{
+                    activeColor: '#fff',
+                    bgColor: '#518519',
+                    color: '#fff',
+                    loaderColor: '#fff',
+                    sliderColor: '#1cb954',
+                    trackArtistColor: 'white',
+                    trackNameColor: 'white',
+                }}
             />
 
         </>
