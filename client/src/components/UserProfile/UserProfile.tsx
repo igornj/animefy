@@ -69,7 +69,7 @@ const User = styled.div`
     border-radius: 50px;
     background: #252525;
     margin: 1rem 1rem;
-    z-index: 2;
+    z-index: 10;
     cursor: pointer;
 
     img{

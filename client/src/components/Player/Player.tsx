@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react';
+import styled from 'styled-components';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { DataContext } from '../../context/dataContext';
 
@@ -37,7 +38,7 @@ function Player({ accessToken, uri, searchUris }: any) {
 
 
     return (
-        <>
+        <PlayerContainer>
             <SpotifyPlayer
                 token={accessToken}
                 uris={uri}
@@ -49,7 +50,7 @@ function Player({ accessToken, uri, searchUris }: any) {
                 initialVolume={0.1}
                 styles={{
                     activeColor: '#fff',
-                    bgColor: '#518519',
+                    bgColor: 'rgba(0,0,0,0.1)',
                     color: '#fff',
                     loaderColor: '#fff',
                     sliderColor: '#1cb954',
@@ -58,8 +59,12 @@ function Player({ accessToken, uri, searchUris }: any) {
                 }}
             />
 
-        </>
+        </PlayerContainer>
     )
 }
+
+const PlayerContainer = styled.div`
+    z-index: 8;
+`;
 
 export default Player

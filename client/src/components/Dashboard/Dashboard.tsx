@@ -120,10 +120,6 @@ const Dashboard: React.FC = () => {
                     ))}
                 </Tracks>
             </SearchContainer>
-            <div>
-
-            </div>
-
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
             <AnimeScenary />
@@ -146,9 +142,10 @@ const SearchContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+    z-index: 10;
     margin-bottom: 2rem;
     height: 75vh;
+    /* background: rgba(0,0,0,0.8); */
     
 
     input {

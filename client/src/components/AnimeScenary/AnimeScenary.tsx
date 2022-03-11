@@ -43,7 +43,6 @@ const AnimeScenaryContainer = styled.div`
     height: 100%;
     position: absolute;
 
- 
     img{
         width: 100vw;
         height: 100vh;
