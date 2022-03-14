@@ -29,19 +29,23 @@ const spotifyApi = new SpotifyWebApi({
     clientId: 'd76d730f48874bc0ac6119312471f2fd',
 });
 
+let gifColor;
+
+
 const Dashboard: React.FC = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any>([]);
     const [playingTrack, setPlayingTrack] = useState<any>();
     const accessToken = useAuth() as string;
-    const { authUrl } = useContext(DataContext);
+    const { authUrl, gifAverageColor } = useContext(DataContext);
+    gifColor = gifAverageColor;
+    console.log(gifColor)
     const searchUris: string[] = [];
+
 
     const chooseTrack = (track: any) => {
         setPlayingTrack(track);
-        setSearch("");
     }
-
 
     useEffect(() => {
         searchResults.map((music: string[] | any) => {
@@ -108,55 +112,74 @@ const Dashboard: React.FC = () => {
     return (
         <DashboardContainer>
             <UserProfile accessToken={accessToken} />
-            <SearchContainer>
-                <input type="search" placeholder='Search a song' value={search} onChange={(e) => setSearch(e.target.value)} />
+            <AnimeScenary />
+            <HoverContainer>
+                <input type="search" placeholder='Procure uma música' value={search} onChange={(e) => setSearch(e.target.value)} />
+                {search ? <></> : <h1 style={{ color: 'white', fontSize: '1rem', marginTop: '1rem' }}>Sua música/artista será mostrada aqui</h1>}
                 <Tracks>
                     {searchResults.map((track: any) => (
                         <TrackSearchResult
                             track={track}
                             key={track.uri}
                             chooseTrack={chooseTrack}
+                            search={search}
                         />
                     ))}
                 </Tracks>
-            </SearchContainer>
+                <Player accessToken={accessToken} uri={playingTrack?.uri} searchUris={searchUris} />
+            </HoverContainer>
+
+            <MusicPlaying>
+                <img src={playingTrack?.albumUrl?.url} alt="album" />
+                <h1>{playingTrack?.title}</h1>
+                <p>{playingTrack?.artist}</p>
+            </MusicPlaying>
             {/* <Playlist accessToken={accessToken} />
             <LikedSongs accessToken={accessToken} /> */}
-            <AnimeScenary />
-            <Player accessToken={accessToken} uri={playingTrack} searchUris={searchUris} />
+
+
         </DashboardContainer>
     )
 }
 
 
+
 const DashboardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 100vw;
     overflow: hidden;
 `;
 
-const SearchContainer = styled.div`
+const HoverContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 10;
-    margin-bottom: 2rem;
-    height: 75vh;
-    /* background: rgba(0,0,0,0.8); */
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: rgba(0,0,0,0.8); 
+
+    :hover{
+        opacity: 1;
+    }
     
 
     input {
          border-radius: 15px;
          border: none;
-         outline: none;
          width: 60%;
          height: 40px;
-         margin: 2rem 0 2rem 0;
+         margin-bottom: 3rem;
+         margin-top: -10rem;
          padding: 20px;
          background: #2C2C2C;
+    }
+
+    input:focus{
+        outline: 1px solid #1cb954;
     }
      
     input::placeholder{
@@ -173,8 +196,35 @@ const Tracks = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100vw;
-    height: 60vh;
+    height: 50vh;
     overflow-y: scroll
 `;
+
+
+const MusicPlaying = styled.div`
+    width: 100%;
+    position: absolute;
+    z-index: 9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: ${gifColor};
+
+
+    img{ 
+        width: 200px;
+    }
+
+    h1{
+        font-size: 1rem;
+    }
+
+    p{
+        font-size: 1rem;
+        font-weight: 500;
+    }
+`;
+
 
 export default Dashboard;

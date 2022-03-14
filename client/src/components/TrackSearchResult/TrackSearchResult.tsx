@@ -4,21 +4,27 @@ import styled from 'styled-components';
 type props = {
     track: any,
     chooseTrack: (track: any) => void;
+    search: string
 }
 
-const TrackSearchResult = ({ track, chooseTrack }: props) => {
+const TrackSearchResult = ({ track, chooseTrack, search }: props) => {
 
     function handlePlay() {
-        chooseTrack(track.uri)
+        chooseTrack(track)
     }
 
     return (
         <Container onClick={handlePlay}>
-            <MusicDetails>
-                <img src={track.albumUrl.url} alt="album" />
-                <h1>{track.title}</h1>
-                <p>{track.artist}</p>
-            </MusicDetails>
+            {search ?
+                <MusicDetails>
+                    <img src={track.albumUrl.url} alt="album" />
+                    <h1>{track.title}</h1>
+                    <p>{track.artist}</p>
+                </MusicDetails>
+                :
+
+                <></>
+            }
         </Container>
     )
 }

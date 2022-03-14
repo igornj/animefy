@@ -49,13 +49,14 @@ function Player({ accessToken, uri, searchUris }: any) {
                 showSaveIcon={true}
                 initialVolume={0.1}
                 styles={{
-                    activeColor: '#fff',
-                    bgColor: 'rgba(0,0,0,0.1)',
+                    activeColor: '#1cb954',
+                    bgColor: 'rgba(0,0,0,0.8)',
                     color: '#fff',
                     loaderColor: '#fff',
                     sliderColor: '#1cb954',
-                    trackArtistColor: 'white',
+                    trackArtistColor: '#969696',
                     trackNameColor: 'white',
+                    height: '50px',
                 }}
             />
 
@@ -64,7 +65,10 @@ function Player({ accessToken, uri, searchUris }: any) {
 }
 
 const PlayerContainer = styled.div`
-    z-index: 8;
+    position: fixed; 
+    width: 100%;
+    bottom: 0; 
 `;
+
 
 export default Player
