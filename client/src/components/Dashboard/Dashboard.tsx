@@ -29,19 +29,16 @@ const spotifyApi = new SpotifyWebApi({
     clientId: 'd76d730f48874bc0ac6119312471f2fd',
 });
 
-let gifColor;
-
 
 const Dashboard: React.FC = () => {
     const [search, setSearch] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any>([]);
     const [playingTrack, setPlayingTrack] = useState<any>();
     const accessToken = useAuth() as string;
-    const { authUrl, gifAverageColor } = useContext(DataContext);
-    gifColor = gifAverageColor;
-    console.log(gifColor)
+    const { authUrl, gifAverageColor, complementaryColor } = useContext(DataContext);
     const searchUris: string[] = [];
 
+    console.log(gifAverageColor, complementaryColor);
 
     const chooseTrack = (track: any) => {
         setPlayingTrack(track);
@@ -129,9 +126,9 @@ const Dashboard: React.FC = () => {
                 <Player accessToken={accessToken} uri={playingTrack?.uri} searchUris={searchUris} />
             </HoverContainer>
 
-            <MusicPlaying>
+            <MusicPlaying style={{ background: `${gifAverageColor}` }}>
                 <img src={playingTrack?.albumUrl?.url} alt="album" />
-                <h1>{playingTrack?.title}</h1>
+                <h1 style={{ color: complementaryColor }}>dale</h1>
                 <p>{playingTrack?.artist}</p>
             </MusicPlaying>
             {/* <Playlist accessToken={accessToken} />
@@ -202,18 +199,24 @@ const Tracks = styled.div`
 
 
 const MusicPlaying = styled.div`
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 220px;
+    height: 220px;
     position: absolute;
     z-index: 9;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background: ${gifColor};
+    border: 1px solid white;
 
 
     img{ 
-        width: 200px;
+        width: 150px;
+        margin-top: 1rem;
     }
 
     h1{

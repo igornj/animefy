@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import FastAverageColor from 'fast-average-color';
-
 import { DataContext } from '../../context/dataContext';
+
+const complementaryColors = require('complementary-colors');
 const giphy = require('giphy-api')();
 
 const AnimeScenary = () => {
     const [searchResults, setsearchResults] = useState<any[]>([]);
     const [randomNumber, setRandomNumber] = useState<number>(0);
-    const { musicChanged, setgifAverageColor } = useContext(DataContext);
+    const { musicChanged, setgifAverageColor, setcomplementaryColor } = useContext(DataContext);
     const fac = new FastAverageColor();
 
     useEffect(() => {
@@ -37,7 +38,9 @@ const AnimeScenary = () => {
 
     fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'dominant' })
         .then(color => {
-            setgifAverageColor(color.value);
+            setgifAverageColor(color.rgb);
+            const compColor = new complementaryColors(color.rgb);
+            setcomplementaryColor(compColor.complementary());
         })
         .catch(e => {
             console.error(e);
