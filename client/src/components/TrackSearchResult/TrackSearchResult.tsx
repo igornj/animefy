@@ -43,8 +43,16 @@ const MusicDetails = styled.div`
     width: 60%;
     margin: 1rem 1rem;
 
+    :hover{
+        img{
+            transform: scale(1.1);
+            filter: grayscale(80%) contrast(120%);
+        }
+    }
+
     img{
         width: 100%;
+        transition: all 0.3s ease
     }
 
     h1{

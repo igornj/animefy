@@ -53,21 +53,22 @@ app.post("/", (req: Request, res: Response) => {
         clientSecret: process.env.CLIENT_SECRET,
     });
 
-
-    spotifyApi
-        .authorizationCodeGrant(code)
-        .then((data: { body: { access_token: string; refresh_token: string; expires_in: number; }; }) => {
-            res.json({
-                accessToken: data.body.access_token,
-                refreshToken: data.body.refresh_token,
-                expiresIn: data.body.expires_in,
+    if (code) {
+        spotifyApi
+            .authorizationCodeGrant(code)
+            .then((data: { body: { access_token: string; refresh_token: string; expires_in: number; }; }) => {
+                res.json({
+                    accessToken: data.body.access_token,
+                    refreshToken: data.body.refresh_token,
+                    expiresIn: data.body.expires_in,
+                })
             })
-        })
-        .catch((err: any) => {
-            console.log(err);
-        })
+            .catch((err: any) => {
+                console.log(err);
+            });
+    }
 
-
+    return;
 
 });
 

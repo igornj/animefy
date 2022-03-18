@@ -6,7 +6,7 @@ import { DataContext } from '../../context/dataContext';
 const complementaryColors = require('complementary-colors');
 const giphy = require('giphy-api')();
 
-const AnimeScenary = () => {
+const AnimeScenary = (uri: any) => {
     const [searchResults, setsearchResults] = useState<any[]>([]);
     const [randomNumber, setRandomNumber] = useState<number>(0);
     const { musicChanged, setgifAverageColor, setcomplementaryColor } = useContext(DataContext);
@@ -15,7 +15,7 @@ const AnimeScenary = () => {
     useEffect(() => {
         giphy.search('anime aesthetic', function (err: any, res: any) {
             //console.log(res);
-            setsearchResults(res.data.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
+            setsearchResults(res.data?.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
                 return {
                     url: gif.images.original.url,
                     id: gif.id
@@ -30,21 +30,42 @@ const AnimeScenary = () => {
         setRandomNumber(randomizer());
     }, [musicChanged]);
 
+    useEffect(() => {
+        if (searchResults.length >= 0) {
+            getAverageColor();
+        }
+    }, [uri]);
+
+
+    const getAverageColor = (): void => {
+        fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'simple' })
+            .then(color => {
+                setgifAverageColor(color.rgb);
+                const compColor = new complementaryColors(color.rgb);
+                setcomplementaryColor(compColor.analogous());
+            })
+            .catch(e => {
+                console.error(e);
+            });
+    }
+
 
     const randomizer = (min = 0, max = 25): number => {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
+    // if(searchResults){
+    //     fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'dominant' })
+    //     .then(color => {
+    //         setgifAverageColor(color.rgb);
+    //         const compColor = new complementaryColors(color.rgb);
+    //         setcomplementaryColor(compColor.complementary());
+    //     })
+    //     .catch(e => {
+    //         console.error(e);
+    //     });
+    // }
 
-    fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'dominant' })
-        .then(color => {
-            setgifAverageColor(color.rgb);
-            const compColor = new complementaryColors(color.rgb);
-            setcomplementaryColor(compColor.complementary());
-        })
-        .catch(e => {
-            console.error(e);
-        });
 
 
 

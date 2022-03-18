@@ -68,6 +68,7 @@ const PlayerContainer = styled.div`
     position: fixed; 
     width: 100%;
     bottom: 0; 
+    z-index: 12;
 `;
 
 

@@ -69,8 +69,12 @@ const User = styled.div`
     border-radius: 50px;
     background: #252525;
     margin: 1rem 1rem;
-    z-index: 10;
+    z-index: 12;
     cursor: pointer;
+
+    :hover{
+        background: #383838;
+    }
 
     img{
         width: 42px;
