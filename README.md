@@ -2,7 +2,7 @@
 
 ## Introdução
 
-Esse é um projeto que utiliza a API do Spotify para músicas e uma API para geração de Gifs de cenários de anime. Nele você consegue ouvir suas músicas da sua conta do Spotify enquanto Cenários animados são mostrados ao fundo. 
+Esse é um projeto que utiliza a API do Spotify para músicas e uma API para geração de Gifs de cenários de anime. Nele você consegue ouvir suas músicas da sua conta do Spotify enquanto gifs de Cenários animados são mostrados ao fundo, gerados aleátoriamente a cada mudança de música. 
 
 <p float="left">
     <img width= "260" src="./client/public/assets/animefy01.PNG">
