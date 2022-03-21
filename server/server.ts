@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get('/*', function (req: any, res: any) {
+app.get('/*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
