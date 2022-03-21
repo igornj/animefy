@@ -33,6 +33,7 @@ const UserProfile = ({ accessToken }: any) => {
             .then(function (data) {
                 setUser({
                     email: data.body.email,
+                    //@ts-ignore
                     image: data.body.images[0].url,
                     display_name: data.body.display_name,
                 })

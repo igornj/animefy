@@ -24,6 +24,17 @@ const AnimeScenary = (uri: any) => {
 
         });
 
+
+        // giphy.random('anime scenery', function (err: any, res: any) {
+        //     console.log(res.data);
+        //     setDale(res.data?.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
+        //         return {
+        //             url: gif.images.original.url,
+        //             id: gif.id
+        //         }
+        //     }));
+        // });
+
     }, []);
 
     useEffect(() => {

@@ -11,6 +11,7 @@ const SpotifyWebApi = require('spotify-web-api-node')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/client' + '/build'));
 
 
 app.get('/login', (req: any, res: any) => {
