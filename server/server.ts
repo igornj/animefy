@@ -1,4 +1,4 @@
-import { dirname } from "path";
+
 
 const express = require('express');
 const cors = require('cors');
@@ -6,8 +6,6 @@ require("dotenv").config()
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const dale = path.join(__dirname, '../', 'client')
-console.log(dale)
 
 const SpotifyWebApi = require('spotify-web-api-node')
 
