@@ -106,7 +106,7 @@ app.post("/refresh", (req: Request, res: Response) => {
 
 
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server runnng on port: ', process.env.PORT);
 });
 
