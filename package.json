@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/igornj/animefy/issues"
   },
-  "homepage": "https://github.com/igornj/animefy#readme"
+  "homepage": "https://github.com/igornj/animefy#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }
