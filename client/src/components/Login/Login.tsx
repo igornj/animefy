@@ -8,7 +8,7 @@ import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
 
 
 //import gif01 from '../../../public/assets/01.gif';
-
+//
 
 const Login: React.FC = () => {
 
