@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-node';
+import { ErrorCallback } from 'typescript';
 
 //import useAuth from '../../hooks/useAuth';
 
@@ -28,10 +29,10 @@ const Playlist = ({ accessToken }: any) => {
         spotifyApi.setAccessToken(accessToken);
 
         spotifyApi.getUserPlaylists('12151958760')
-            .then(function (data) {
+            .then(function (data : any) {
                 console.log('Retrieved playlists', data.body);
                 setPlaylistData(data.body.items);
-            }, function (err) {
+            }, function (err : ErrorCallback) {
                 console.log('Something went wrong!', err);
             });
 
@@ -42,10 +43,10 @@ const Playlist = ({ accessToken }: any) => {
             fields: 'items'
         })
             .then(
-                function (data) {
+                function (data : any) {
                     console.log('The playlist contains these tracks', data.body);
                 },
-                function (err) {
+                function (err : ErrorCallback) {
                     console.log('Something went wrong!', err);
                 }
             );
@@ -55,10 +56,10 @@ const Playlist = ({ accessToken }: any) => {
             limit: 5,
             offset: 1
         })
-            .then(function (data) {
+            .then(function (data : any) {
                 console.log('Saved tracks', data.body);
                 //setlikedSongsData(data.body.items)
-            }, function (err) {
+            }, function (err : ErrorCallback) {
                 console.log('Something went wrong!', err);
             });
 

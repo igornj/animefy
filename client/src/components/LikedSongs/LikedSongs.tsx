@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 //import { useDispatch } from 'react-redux'
 import SpotifyWebApi from 'spotify-web-api-node';
+import { ErrorCallback } from 'typescript';
 
 
 type TData = {
@@ -31,11 +32,11 @@ const LikedSongs = ({ accessToken }: any) => {
             limit: 5,
             offset: 1
         })
-            .then(function (data) {
+            .then(function (data : any) {
                 console.log('Saved tracks', data.body);
 
                 setlikedSongsData(data.body.items)
-            }, function (err) {
+            }, function (err : ErrorCallback) {
                 console.log('Something went wrong!', err);
             });
 

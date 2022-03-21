@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-node';
+import { ErrorCallback } from 'typescript';
 
 //import useAuth from '../../hooks/useAuth';
 
@@ -30,14 +31,14 @@ const UserProfile = ({ accessToken }: any) => {
         spotifyApi.setAccessToken(accessToken);
 
         spotifyApi.getMe()
-            .then(function (data) {
+            .then(function (data: any) {
                 setUser({
                     email: data.body.email,
                     //@ts-ignore
                     image: data.body.images[0].url,
                     display_name: data.body.display_name,
                 })
-            }, function (err) {
+            }, function (err: ErrorCallback) {
                 console.log('Something went wrong!', err);
             });
 
