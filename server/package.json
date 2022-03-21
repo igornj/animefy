@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon server.ts",
-    "prod": "node server.ts"
+    "start": "server.ts"
   },
   "keywords": [],
   "author": "",
