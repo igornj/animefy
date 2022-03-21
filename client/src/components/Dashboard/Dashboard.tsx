@@ -15,6 +15,7 @@ import Player from '../Player/Player';
 import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
 import AnimeScenary from '../AnimeScenary/AnimeScenary';
 import Menu from '../Menu/Menu';
+import { ErrorCallback } from 'typescript';
 
 // type TData = {
 //     artist: string,
@@ -22,6 +23,13 @@ import Menu from '../Menu/Menu';
 //     uri: string
 //     albumUrl: string
 //     tracks?: SpotifyApi.PagingObject<SpotifyApi.TrackObjectFull> | undefined
+// }
+
+// interface Data {
+//     artist: 'string',
+//     title: 'string',
+//     uri: 'string',
+//     albumUrl: 'string',
 // }
 
 
@@ -72,9 +80,9 @@ const Dashboard: React.FC = () => {
         if (!accessToken) return;
 
         spotifyApi.searchTracks(search, { limit: 20, offset: 1 })
-            .then(function (data) {
+            .then(function (data: any) {
                 setSearchResults(
-                    data?.body?.tracks?.items.map(track => {
+                    data?.body?.tracks?.items.map((track: any) => {
                         return {
                             artist: track.artists[0].name,
                             title: track.name,
@@ -84,7 +92,7 @@ const Dashboard: React.FC = () => {
                     })
                 )
 
-            }, function (err) {
+            }, function (err: ErrorCallback) {
                 console.error(err);
             });
 
