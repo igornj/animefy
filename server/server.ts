@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-
 const express = require('express');
 const cors = require('cors');
 require("dotenv").config()
@@ -14,12 +12,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get('/*', function (req: Request, res: Response) {
+app.get('/*', function (req: any, res: any) {
     res.sendFile(path.join(__dirname, 'cliend', 'build', 'index.html'));
 });
 
 
-app.get('/login', (req: Request, res: Response) => {
+app.get('/login', (req: any, res: any) => {
     //Here genarate a auth url to make the user login
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
@@ -50,7 +48,7 @@ app.get('/login', (req: Request, res: Response) => {
 
 
 
-app.post("/", (req: Request, res: Response) => {
+app.post("/", (req: any, res: any) => {
     const code = req.body.code;
 
     const spotifyApi = new SpotifyWebApi({
@@ -80,7 +78,7 @@ app.post("/", (req: Request, res: Response) => {
 
 
 
-app.post("/refresh", (req: Request, res: Response) => {
+app.post("/refresh", (req: any, res: any) => {
     //Here we refresh the token using the refreshToken generated on the login in
     const refreshToken = req.body.refreshToken as string
     const spotifyApi = new SpotifyWebApi({
