@@ -5,16 +5,21 @@ const cors = require('cors');
 require("dotenv").config()
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const SpotifyWebApi = require('spotify-web-api-node')
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/client' + '/build'));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+app.get('/*', function (req: Request, res: Response) {
+    res.sendFile(path.join(__dirname, 'cliend', 'build', 'index.html'));
+});
 
 
-app.get('/login', (req: any, res: any) => {
+app.get('/login', (req: Request, res: Response) => {
     //Here genarate a auth url to make the user login
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
