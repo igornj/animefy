@@ -14,10 +14,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../', 'client', 'build')));
 
-app.get('*', (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
-});
-
 
 app.get('/login', (req: any, res: any) => {
     //Here genarate a auth url to make the user login
@@ -102,6 +98,11 @@ app.post("/refresh", (req: any, res: any) => {
             console.log(err)
             res.sendStatus(400)
         })
+});
+
+
+app.get('*', (req: any, res: any) => {
+    res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
 });
 
 
