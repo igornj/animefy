@@ -12,7 +12,11 @@ const SpotifyWebApi = require('spotify-web-api-node')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../', 'client', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+
+app.get('*', (req: any, res: any) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+});
 
 
 app.get('/login', (req: any, res: any) => {
@@ -98,11 +102,6 @@ app.post("/refresh", (req: any, res: any) => {
             console.log(err)
             res.sendStatus(400)
         })
-});
-
-
-app.get('*', (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, '../', 'client', 'build', 'index.html'));
 });
 
 
