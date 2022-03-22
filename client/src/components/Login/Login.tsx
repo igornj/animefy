@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
 
 
-//import gif01 from '../../../public/assets/01.gif';
-//
+import gif01 from '../../../public/assets/01.gif';
+
 
 const Login: React.FC = () => {
 
@@ -33,7 +33,7 @@ const Login: React.FC = () => {
 
   return (
     <LoginContainer>
-      <img src="" alt="gif" />
+      <img src={gif01} alt="gif" />
       <LoginInfo>
         <h1>AnimeFy</h1>
         <h2>"Web app para ouvir suas músicas do Spotify com cenários de anime maravilhosos ao fundo"</h2>
