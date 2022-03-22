@@ -10,10 +10,15 @@ const SpotifyWebApi = require('spotify-web-api-node')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+// app.use(express.static(path.join(__dirname, 'client', 'build')));
 
+// app.get('*', (req: any, res: any) => {
+//     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+// });
+
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.get('*', (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 
 

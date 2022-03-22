@@ -9,10 +9,11 @@ const SpotifyWebApi = require('spotify-web-api-node');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 });
+
 app.get('/login', (req, res) => {
     //Here genarate a auth url to make the user login
     const spotifyApi = new SpotifyWebApi({
@@ -48,15 +49,15 @@ app.post("/", (req, res) => {
         spotifyApi
             .authorizationCodeGrant(code)
             .then((data) => {
-            res.json({
-                accessToken: data.body.access_token,
-                refreshToken: data.body.refresh_token,
-                expiresIn: data.body.expires_in,
-            });
-        })
+                res.json({
+                    accessToken: data.body.access_token,
+                    refreshToken: data.body.refresh_token,
+                    expiresIn: data.body.expires_in,
+                });
+            })
             .catch((err) => {
-            console.log(err);
-        });
+                console.log(err);
+            });
     }
     return;
 });
@@ -72,15 +73,15 @@ app.post("/refresh", (req, res) => {
     spotifyApi
         .refreshAccessToken()
         .then((data) => {
-        res.json({
-            accessToken: data.body.accessToken,
-            expiresIn: data.body.expiresIn,
-        });
-    })
+            res.json({
+                accessToken: data.body.accessToken,
+                expiresIn: data.body.expiresIn,
+            });
+        })
         .catch((err) => {
-        console.log(err);
-        res.sendStatus(400);
-    });
+            console.log(err);
+            res.sendStatus(400);
+        });
 });
 //process.env.PORT || 
 app.listen(process.env.PORT || 3001, () => {
