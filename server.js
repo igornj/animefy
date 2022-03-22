@@ -7,17 +7,18 @@ const path = require('path');
 
 const SpotifyWebApi = require('spotify-web-api-node')
 
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get('*', (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 
-app.get('/login', (req: any, res: any) => {
+app.get('/login', (req, res) => {
     //Here genarate a auth url to make the user login
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
@@ -48,7 +49,7 @@ app.get('/login', (req: any, res: any) => {
 
 
 
-app.post("/", (req: any, res: any) => {
+app.post("/", (req, res) => {
     const code = req.body.code;
 
     const spotifyApi = new SpotifyWebApi({
@@ -60,14 +61,14 @@ app.post("/", (req: any, res: any) => {
     if (code) {
         spotifyApi
             .authorizationCodeGrant(code)
-            .then((data: { body: { access_token: string; refresh_token: string; expires_in: number; }; }) => {
+            .then((data) => {
                 res.json({
                     accessToken: data.body.access_token,
                     refreshToken: data.body.refresh_token,
                     expiresIn: data.body.expires_in,
                 })
             })
-            .catch((err: any) => {
+            .catch((err) => {
                 console.log(err);
             });
     }
@@ -78,9 +79,9 @@ app.post("/", (req: any, res: any) => {
 
 
 
-app.post("/refresh", (req: any, res: any) => {
+app.post("/refresh", (req, res) => {
     //Here we refresh the token using the refreshToken generated on the login in
-    const refreshToken = req.body.refreshToken as string
+    const refreshToken = req.body.refreshToken;
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
         clientId: process.env.CLIENT_ID,
@@ -90,13 +91,13 @@ app.post("/refresh", (req: any, res: any) => {
 
     spotifyApi
         .refreshAccessToken()
-        .then((data: { body: { accessToken: any; expiresIn: any; }; }) => {
+        .then((data) => {
             res.json({
                 accessToken: data.body.accessToken,
                 expiresIn: data.body.expiresIn,
             })
         })
-        .catch((err: any) => {
+        .catch((err) => {
             console.log(err)
             res.sendStatus(400)
         })
