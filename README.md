@@ -23,8 +23,7 @@ Esse é um projeto que utiliza a API do Spotify para músicas e uma API para ger
 
 ## Como utilizar
 
-Basta entrar no site: 
-E realizar o login na sua conta do Spotify.
+Basta entrar no [animefy](https://aniimefy.herokuapp.com/login) e realizar o login na sua conta do Spotify. 💚
 
 
 
