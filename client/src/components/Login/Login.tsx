@@ -7,13 +7,13 @@ import styled from 'styled-components';
 import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
 
 
-import gif01 from '../../../public/assets/01.gif';
+import gif01 from './01.gif';
+import { AUTH_URL } from '../../utils';
 
 
 const Login: React.FC = () => {
 
   const [authURL, setauthURL] = useState<string>('');
-  //https://accounts.spotify.com/authorize?client_id=d76d730f48874bc0ac6119312471f2fd&response_type=code&redirect_uri=http://localhost:3000/&scope=user-read-private%20user-read-email%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20user-library-read%20user-library-modify%20streaming%20user-library-read%20user-library-modify&state=aqASTOBUmSUm2FBA
 
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
         </Socials>
 
         <LoginBtn>
-          <a href={authURL}>Logue com o Spotify</a>
+          <a href={AUTH_URL}>Logue com o Spotify</a>
         </LoginBtn>
 
       </LoginInfo>
@@ -126,6 +126,7 @@ const LoginInfo = styled.div`
 
 const LoginBtn = styled.div`
   margin-top: 4rem;
+  cursor: pointer;
 
   a{
     text-decoration: none;
