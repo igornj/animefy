@@ -2,10 +2,10 @@
   "name": "animefy",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server.ts",
+    "dev": "nodemon server.ts",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],

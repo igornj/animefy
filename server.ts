@@ -7,18 +7,17 @@ const path = require('path');
 
 const SpotifyWebApi = require('spotify-web-api-node')
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
-app.get('*', (req, res) => {
+app.get('*', (req: any, res: any) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 
-app.get('/login', (req, res) => {
+app.get('/login', (req: any, res: any) => {
     //Here genarate a auth url to make the user login
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
@@ -49,7 +48,7 @@ app.get('/login', (req, res) => {
 
 
 
-app.post("/", (req, res) => {
+app.post("/", (req: any, res: any) => {
     const code = req.body.code;
 
     const spotifyApi = new SpotifyWebApi({
@@ -61,14 +60,14 @@ app.post("/", (req, res) => {
     if (code) {
         spotifyApi
             .authorizationCodeGrant(code)
-            .then((data) => {
+            .then((data: { body: { access_token: string; refresh_token: string; expires_in: number; }; }) => {
                 res.json({
                     accessToken: data.body.access_token,
                     refreshToken: data.body.refresh_token,
                     expiresIn: data.body.expires_in,
                 })
             })
-            .catch((err) => {
+            .catch((err: any) => {
                 console.log(err);
             });
     }
@@ -79,9 +78,9 @@ app.post("/", (req, res) => {
 
 
 
-app.post("/refresh", (req, res) => {
+app.post("/refresh", (req: any, res: any) => {
     //Here we refresh the token using the refreshToken generated on the login in
-    const refreshToken = req.body.refreshToken;
+    const refreshToken = req.body.refreshToken as string
     const spotifyApi = new SpotifyWebApi({
         redirectUri: process.env.REDIRECT_URI,
         clientId: process.env.CLIENT_ID,
@@ -91,13 +90,13 @@ app.post("/refresh", (req, res) => {
 
     spotifyApi
         .refreshAccessToken()
-        .then((data) => {
+        .then((data: { body: { accessToken: any; expiresIn: any; }; }) => {
             res.json({
                 accessToken: data.body.accessToken,
                 expiresIn: data.body.expiresIn,
             })
         })
-        .catch((err) => {
+        .catch((err: any) => {
             console.log(err)
             res.sendStatus(400)
         })
@@ -105,23 +104,6 @@ app.post("/refresh", (req, res) => {
 
 
 //process.env.PORT || 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(3001, () => {
     console.log('Server runnng on port: ', process.env.PORT);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
