@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect, EffectCallback } from 'react'
-import axios from 'axios';
+import axios from '../utils/axios';
 
 import { code } from '../components/Dashboard/Dashboard';
 
@@ -15,7 +15,7 @@ const useAuth = (): string | undefined => {
     useEffect(() => {
         let cancel = false
         axios
-            .post("http://localhost:3001/", {
+            .post("/", {
                 code,
             })
             .then(res => {
@@ -40,7 +40,7 @@ const useAuth = (): string | undefined => {
         if (!refreshToken || !expiresIn) return
         const interval = setInterval(() => {
             axios
-                .post("http://localhost:3001/refresh", {
+                .post("/refresh", {
                     refreshToken,
                 })
                 .then(res => {
@@ -55,7 +55,7 @@ const useAuth = (): string | undefined => {
 
         return () => clearInterval(interval)
     }, [refreshToken, expiresIn])
-    
+
     return accessToken;
 }
 

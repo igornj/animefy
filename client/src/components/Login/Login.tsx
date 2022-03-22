@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import useAuth from '../../hooks/useAuth';
 import styled from 'styled-components';
 import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
 
 
 import gif01 from './01.gif';
-import { AUTH_URL } from '../../utils';
+import { AUTH_URL } from '../../utils/authurl';
 
 
 const Login: React.FC = () => {
@@ -17,7 +17,7 @@ const Login: React.FC = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:3001/login')
+    axios.get('/login')
       .then(res => {
         setauthURL(res.data.authurl);
       }).catch(e => console.log(e));
