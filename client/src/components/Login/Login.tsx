@@ -8,8 +8,7 @@ import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
 
 
 import gif01 from './01.gif';
-import { AUTH_URL } from '../../utils/authurl';
-
+import igor from './igor.jpg';
 
 const Login: React.FC = () => {
 
@@ -35,13 +34,12 @@ const Login: React.FC = () => {
     <LoginContainer>
       <img src={gif01} alt="gif" />
       <LoginInfo>
-        <h1>AnimeFy</h1>
+        <h1>animeFy</h1>
         <h2>"Web app para ouvir suas músicas do Spotify com cenários de anime maravilhosos ao fundo"</h2>
         <p>Esse é um projeto que utiliza a API do Spotify para músicas e uma API para geração de Gifs de cenários de anime. Nele você consegue ouvir suas músicas da sua conta do Spotify enquanto gifs de Cenários animados são mostrados ao fundo, gerados aleátoriamente a cada mudança de música.</p>
         <p>Basta logar com a sua conta Spotify abaixo e curtir a vibe 😎</p>
         <p>*lembrando que só funciona para contas premium*</p>
-        <h3>Prometo com o tempo adicionar coisas novas porque tem MUITA COISA pra melhorar, principalmente a qualidade dos gifs. 😔</h3>
-        <h3>Fiquem de olho principalmente no repositório do projeto, lá irei atualizar sempre sobre.</h3>
+        <h3>As atualizações sobre novas features do animeFy serão informadas principalmente no repositório do projeto.</h3>
         <Socials>
           <a href="https://twitter.com/fosade_" target="_blank" rel="noreferrer"><BsTwitter color={'black'} size={30} /></a>
           <a href="https://github.com/igornj/animefy" target="_blank" rel="noreferrer"><BsGithub color={'black'} size={30} /></a>
@@ -49,9 +47,9 @@ const Login: React.FC = () => {
         </Socials>
 
         <LoginBtn>
-          <a href={AUTH_URL}>Logue com o Spotify</a>
+          <a href={authURL}>Logue com o Spotify</a>
         </LoginBtn>
-
+        <img src={igor} alt="igor logo" />
       </LoginInfo>
     </LoginContainer>
   )
@@ -81,6 +79,7 @@ const LoginInfo = styled.div`
   z-index: 2;
   position: absolute;
   border-radius: 10px;
+  overflow: auto;
 
 
   h1{
@@ -117,10 +116,17 @@ const LoginInfo = styled.div`
   }
 
   h3{
-    margin: 1rem 1rem 0 1rem;
     font-size: 0.8rem;
     text-align: center;
     font-weight: 800;
+  }
+
+  img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 1rem;
   }
 `;
 

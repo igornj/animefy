@@ -45,7 +45,7 @@ const MusicDetails = styled.div`
 
     :hover{
         img{
-            transform: scale(1.1);
+            transform: scale(0.9);
             filter: grayscale(80%) contrast(120%);
         }
     }
@@ -63,6 +63,10 @@ const MusicDetails = styled.div`
     p{
         color: #C2C2C2;
         font-size: 0.9rem;
+    }
+
+    @media screen and (min-width: 1000px){
+        width: 50%;
     }
 `;
 

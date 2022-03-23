@@ -11,24 +11,25 @@ const Menu = () => {
 
     return (
         <MenuContainer>
-            <Search onClick={() => setisOpen(true)}>
-                <SearchIcon />
-            </Search>
+            <MenuItems>
+                <Search onClick={() => setisOpen(true)}>
+                    <SearchIcon />
+                </Search>
 
-            <FavSongs>
-                <HeartIcon />
-            </FavSongs>
+                <FavSongs>
+                    <HeartIcon />
+                </FavSongs>
 
 
-            <Playlists>
-                <PlaylistIcon />
-            </Playlists>
+                <Playlists>
+                    <PlaylistIcon />
+                </Playlists>
+            </MenuItems>
         </MenuContainer>
     )
 }
 
-
-const MenuContainer = styled.div`
+const MenuItems = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,17 +37,31 @@ const MenuContainer = styled.div`
     row-gap: 1rem;
     width: 100vw;
     height: 100vh;
-    z-index: 11;
     background:  rgba(0,0,0,0.8);
-    position: absolute;
+    row-gap: 1rem;
+    z-index: 11;
     opacity: 0;
     transition: opacity 0.3s ease;
 
-    :hover{
-        opacity: 1;
+    @media screen and (min-width: 1000px){
+        width: 50vw;
     }
-
 `;
+
+
+const MenuContainer = styled.div`
+    width: 100%;
+    transition: opacity 0.3s ease;
+    position: absolute;
+
+    :hover{
+        ${MenuItems}{
+            opacity: 1;
+        }
+    }
+`;
+
+
 
 const Search = styled.div`
     cursor: pointer;

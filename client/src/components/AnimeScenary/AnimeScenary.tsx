@@ -24,17 +24,6 @@ const AnimeScenary = (uri: any) => {
 
         });
 
-
-        // giphy.random('anime scenery', function (err: any, res: any) {
-        //     console.log(res.data);
-        //     setDale(res.data?.map((gif: { images: { original: { url: any; }; }; id: any; }) => {
-        //         return {
-        //             url: gif.images.original.url,
-        //             id: gif.id
-        //         }
-        //     }));
-        // });
-
     }, []);
 
     useEffect(() => {
@@ -45,6 +34,7 @@ const AnimeScenary = (uri: any) => {
         if (searchResults.length >= 0) {
             getAverageColor();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uri]);
 
 
@@ -97,6 +87,12 @@ const AnimeScenaryContainer = styled.div`
         width: 100vw;
         height: 100vh;
         object-fit: cover;
+    }
+
+    @media screen and (min-width: 1000px){
+        img{
+            object-fit: fill;
+        }
     }
 `;
 

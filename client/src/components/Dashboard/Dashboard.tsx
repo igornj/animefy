@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-node';
-import { IoIosClose } from 'react-icons/io';
+import { RiHome2Line } from 'react-icons/ri';
 import { Navigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'
 import { DataContext } from '../../context/dataContext';
@@ -57,7 +57,8 @@ const Dashboard: React.FC = () => {
         searchResults.map((music: string[] | any) => {
             return searchUris.push(music.uri)
         })
-    }, [search, searchResults, searchUris]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [search, searchResults]);
 
 
 
@@ -122,7 +123,7 @@ const Dashboard: React.FC = () => {
 
             {isOpen ? (
                 <HoverContainer>
-                    <CloseIcon onClick={() => setisOpen(false)} />
+                    <HomeButton onClick={() => setisOpen(false)} />
                     <input type="search" placeholder='Procure uma música' value={search} onChange={(e) => setSearch(e.target.value)} />
                     {search ? '' : <h1 style={{ color: 'white', fontSize: '1rem', marginTop: '1rem' }}>Procure uma música/artista</h1>}
                     <Tracks>
@@ -188,7 +189,7 @@ const HoverContainer = styled.div`
     opacity: 0;
     transition: opacity 0.3s ease;
     background: rgba(0,0,0,0.8);
-    position: relative; 
+    position: absolute; 
 
     :hover{
         opacity: 1;
@@ -200,10 +201,10 @@ const HoverContainer = styled.div`
          border: none;
          width: 60%;
          height: 40px;
-         margin-bottom: 3rem;
-         margin-top: -10rem;
          padding: 20px;
          background: #2C2C2C;
+         position: absolute;
+         top: 8rem;
     }
 
     input:focus{
@@ -217,28 +218,35 @@ const HoverContainer = styled.div`
     input, select, textarea{
          color: #7D7D7D;
     }   
+
+    @media screen and (min-width: 1000px){
+        input{
+            
+        }
+    }
  
 `;
 
-const CloseIcon = styled(IoIosClose)`
+const HomeButton = styled(RiHome2Line)`
     cursor: pointer;
     color: #707070;
-    font-size: 3.5rem;
+    font-size: 2.2rem;
     transition: color 0.3s ease;
     :hover{
         color: #1cb954;
     }
     z-index: 11;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 8rem;
+    right: 3rem;
 `;
 
 const Tracks = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100vw;
-    height: 50vh;
+    height: 65vh;
+    margin-top: 4rem;
     overflow-y: scroll;
 
     /* width */
@@ -262,6 +270,12 @@ const Tracks = styled.div`
     ::-webkit-scrollbar-thumb:hover {
         background: #127a37;
     }
+
+    @media screen and (min-width: 1000px){
+        margin-top: 8rem;
+        width: 50vw;
+        height: 70vh;
+    }
 `;
 
 
@@ -276,7 +290,14 @@ const MusicPlaying = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid white; 
+    border: 1px solid white;  
+
+    @media screen and (min-width: 1000px){
+        width: 340px;
+        height: 340px;
+        top: 50%;
+        left: 80%;
+    }
 `;
 
 
@@ -306,6 +327,21 @@ const TrackInfo = styled.div`
         color: #e3e3e3;
         margin-bottom: 5px;
     } 
+
+    @media screen and (min-width: 1000px){
+        img{ 
+            width: 260px;
+        }
+
+        h1{
+            font-size: 1rem;
+            margin: 10px 0 0 0;
+        }
+
+        p{
+            margin-top: 2px;
+        } 
+    }
 `;
 
 
