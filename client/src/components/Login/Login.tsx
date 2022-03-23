@@ -5,6 +5,7 @@ import axios from '../../utils/axios';
 import useAuth from '../../hooks/useAuth';
 import styled from 'styled-components';
 import { BsTwitter, BsInstagram, BsGithub } from 'react-icons/bs';
+import { AUTH_URL } from '../../utils/authurl';
 
 
 import gif01 from './01.gif';
@@ -13,6 +14,7 @@ import igor from './igor.jpg';
 const Login: React.FC = () => {
 
   const [authURL, setauthURL] = useState<string>('');
+
 
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const Login: React.FC = () => {
         </Socials>
 
         <LoginBtn>
-          <a href={authURL}>Logue com o Spotify</a>
+          <a href={AUTH_URL}>Logue com o Spotify</a>
         </LoginBtn>
         <img src={igor} alt="igor logo" />
       </LoginInfo>
