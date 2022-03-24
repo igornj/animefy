@@ -45,12 +45,14 @@ const MenuItems = styled.div`
 
     @media screen and (min-width: 1000px){
         width: 50vw;
+        height: 95vh;
     }
 `;
 
 
 const MenuContainer = styled.div`
     width: 100%;
+    height: 100%;
     transition: opacity 0.3s ease;
     position: absolute;
 

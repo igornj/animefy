@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
         searchResults.map((music: string[] | any) => {
             return searchUris.push(music.uri)
         })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search, searchResults]);
 
 
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
             <AnimeScenary uri={playingTrack?.uri} />
 
             {isOpen ? (
-                <HoverContainer>
+                <SearchContainer>
                     <HomeButton onClick={() => setisOpen(false)} />
                     <input type="search" placeholder='Procure uma música' value={search} onChange={(e) => setSearch(e.target.value)} />
                     {search ? '' : <h1 style={{ color: 'white', fontSize: '1rem', marginTop: '1rem' }}>Procure uma música/artista</h1>}
@@ -136,7 +136,7 @@ const Dashboard: React.FC = () => {
                             />
                         ))}
                     </Tracks>
-                </HoverContainer>) : (
+                </SearchContainer>) : (
                 <Menu />
             )}
 
@@ -162,24 +162,7 @@ const PlayerContainer = styled.div`
     opacity: 0;
 `;
 
-const DashboardContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-
-    :hover{
-        ${PlayerContainer}{
-            opacity: 1
-        }
-    }
-
-`;
-
-
-
-const HoverContainer = styled.div`
+const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,6 +209,29 @@ const HoverContainer = styled.div`
     }
  
 `;
+
+const DashboardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    :hover{
+        ${PlayerContainer}{
+            opacity: 1
+        }
+
+        ${SearchContainer}{
+            opacity: 1
+        }
+    }
+
+`;
+
+
+
+
 
 const HomeButton = styled(RiHome2Line)`
     cursor: pointer;
@@ -286,7 +292,6 @@ const MusicPlaying = styled.div`
     width: 250px;
     height: 250px;
     position: absolute;
-    z-index: 9;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -297,6 +302,7 @@ const MusicPlaying = styled.div`
         height: 340px;
         top: 50%;
         left: 80%;
+        z-index: 1;
     }
 `;
 
