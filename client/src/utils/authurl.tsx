@@ -3,3 +3,4 @@ export const AUTH_URL = 'https://accounts.spotify.com/authorize?client_id=d76d73
 //https://aniimefy.herokuapp.com/
 //http://localhost:3000/    //client
 //http://localhost:3001/    //server
+
