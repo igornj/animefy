@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Navigate } from 'react-router-dom';
 import axios from '../../utils/axios';
 import useAuth from '../../hooks/useAuth';
@@ -14,8 +14,6 @@ import igor from './igor.jpg';
 const Login: React.FC = () => {
 
   const [authURL, setauthURL] = useState<string>('');
-
-
 
   useEffect(() => {
     axios.get('/login')
@@ -72,10 +70,6 @@ const LoginContainer = styled.div`
   img{
     width: 100%;
     height: 100vh;
-    /* object-fit: fit;
-    position: absolute;
-    top:0;
-    left:0; */
   }
 
 `;

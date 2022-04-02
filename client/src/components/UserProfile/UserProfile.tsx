@@ -67,7 +67,7 @@ const User = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 160px;
+    width: 130px;
     border-radius: 50px;
     background: #252525;
     margin: 1rem 1rem;
@@ -79,7 +79,7 @@ const User = styled.div`
     }
 
     img{
-        width: 42px;
+        width: 35px;
         border-radius: 50%;
         margin: 4px;
     }
@@ -88,7 +88,22 @@ const User = styled.div`
         color: #EBEBEB;
         font-weight: 400;
         font-size: 0.8rem;
-        margin-left: 0.8rem;
+        margin-left: 0.1rem;
+    }
+
+    @media screen and (min-width: 1000px){
+        width: 160px;
+
+        img{
+            width: 45px;
+        }
+
+        p{
+            color: #EBEBEB;
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
     }
 `;
 

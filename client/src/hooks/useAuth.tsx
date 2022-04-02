@@ -3,14 +3,13 @@
 import React, { useState, useEffect, EffectCallback } from 'react'
 import axios from '../utils/axios';
 
-import { code } from '../components/Dashboard/Dashboard';
-
-
+import { code } from '../pages/Dashboard/Dashboard';
 
 const useAuth = (): string | undefined => {
-    const [accessToken, setAccessToken] = useState<any | undefined>()
-    const [refreshToken, setRefreshToken] = useState<string | undefined>()
-    const [expiresIn, setExpiresIn] = useState<number | undefined>()
+    const [accessToken, setAccessToken] = useState<any | undefined>();
+    const [refreshToken, setRefreshToken] = useState<string | undefined>();
+    const [expiresIn, setExpiresIn] = useState<number | undefined>();
+
 
     useEffect(() => {
         let cancel = false

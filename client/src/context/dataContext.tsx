@@ -12,13 +12,16 @@ export const DataContextProvider: React.FC = ({ children }) => {
     const [gifAverageColor, setgifAverageColor] = useState<string>();
     const [complementaryColor, setcomplementaryColor] = useState<string | undefined>();
     const [isOpen, setisOpen] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [playingTrack, setPlayingTrack] = useState<any>();
+    const [searchUris, setsearchUris] = useState<string[]>([]);
 
     //style={{ color: `rgb(${complementaryColor[1].r}, ${complementaryColor[1].g}, ${complementaryColor[1].b})` }}
 
 
     return (
         <DataContext.Provider
-            value={{ authUrl: authUrl, musicChanged: musicChanged, setmusicChanged: setmusicChanged, gifAverageColor: gifAverageColor, setgifAverageColor: setgifAverageColor, complementaryColor: complementaryColor, setcomplementaryColor: setcomplementaryColor, isOpen: isOpen, setisOpen: setisOpen }}
+            value={{ authUrl: authUrl, musicChanged: musicChanged, setmusicChanged: setmusicChanged, gifAverageColor: gifAverageColor, setgifAverageColor: setgifAverageColor, complementaryColor: complementaryColor, setcomplementaryColor: setcomplementaryColor, isOpen: isOpen, setisOpen: setisOpen, isLoading: isLoading, setIsLoading: setIsLoading, playingTrack: playingTrack, setPlayingTrack: setPlayingTrack, searchUris: searchUris, setsearchUris: setsearchUris }}
         >
             {children}
         </DataContext.Provider>

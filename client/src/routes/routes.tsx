@@ -2,8 +2,8 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 //components
-import Login from '../components/Login/Login';
-import Page404 from '../components/Page404/Page404';
+import Login from '../pages/Login/Login';
+import Page404 from '../pages/Page404/Page404';
 import PrivateRoutes from './privateRoutes';
 
 

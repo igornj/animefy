@@ -59,7 +59,6 @@ function Player({ accessToken, uri, searchUris }: any) {
                     height: '50px',
                 }}
             />
-
         </PlayerContainer>
     )
 }

@@ -55,6 +55,7 @@ const MenuContainer = styled.div`
     height: 100%;
     transition: opacity 0.3s ease;
     position: absolute;
+    z-index: 11;
 
     :hover{
         ${MenuItems}{

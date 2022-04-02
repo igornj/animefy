@@ -4,7 +4,7 @@ import FastAverageColor from 'fast-average-color';
 import { DataContext } from '../../context/dataContext';
 
 const complementaryColors = require('complementary-colors');
-const giphy = require('giphy-api')();
+const giphy = require('giphy-api')(process.env.REACT_APP_GIPHY_KEY);
 
 const AnimeScenary = (uri: any) => {
     const [searchResults, setsearchResults] = useState<any[]>([]);
@@ -34,7 +34,7 @@ const AnimeScenary = (uri: any) => {
         if (searchResults.length >= 0) {
             getAverageColor();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uri]);
 
 
