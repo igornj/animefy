@@ -1,17 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { ErrorCallback } from 'typescript';
+import ProfileDetails from '../ProfileDetails/ProfileDetails';
+import { DataContext } from '../../context/dataContext';
 
 //import useAuth from '../../hooks/useAuth';
 
 
 type TUser = {
-    email?: string | undefined,
-    image?: string | undefined,
-    url?: string | undefined,
-    display_name?: string | undefined,
+    email?: string,
+    image?: string,
+    url?: string,
+    display_name?: string,
+    country?: string,
+    id?: string,
+    followers?: number,
 }
 
 const spotifyApi = new SpotifyWebApi({
@@ -20,6 +25,7 @@ const spotifyApi = new SpotifyWebApi({
 
 const UserProfile = ({ accessToken }: any) => {
     const [user, setUser] = useState<TUser>({});
+    const { setOpenProfile, openProfile } = useContext(DataContext);
     //const accessToken = useAuth();
 
     // if (!accessToken) {
@@ -37,6 +43,10 @@ const UserProfile = ({ accessToken }: any) => {
                     //@ts-ignore
                     image: data.body.images[0].url,
                     display_name: data.body.display_name,
+                    url: data.body.external_urls.spotify,
+                    country: data.body.country,
+                    id: data.body.id,
+                    followers: data.body.followers.total,
                 })
             }, function (err: ErrorCallback) {
                 console.log('Something went wrong!', err);
@@ -47,10 +57,12 @@ const UserProfile = ({ accessToken }: any) => {
 
     return (
         <UserProfileContainer>
-            <User>
+            <User onClick={() => setOpenProfile(!openProfile)}>
                 <img src={user.image} alt="user" />
                 <p>{user.display_name}</p>
             </User>
+
+            {openProfile ? <ProfileDetails user={user} /> : <></>}
         </UserProfileContainer>
     )
 }

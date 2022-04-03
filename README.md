@@ -21,9 +21,13 @@ Esse é um projeto que utiliza a API do Spotify para músicas e uma API para ger
 - *Melhorar qualidade dos gifs, (talvez eu que tenha que criar cada um deles😔)*
 - *Manter sessão do usuário sempre logada, refreshToken*
 
-## Como utilizar
+## Acesso
+Como é um projeto pessoal e com pouquissimos acessos, ainda não vale a pena solicitar uma extensão por parte da Spotify
+para liberar as requisições para qualquer usuário.
 
-Basta entrar no [animefy](https://aniimefy.herokuapp.com/login) e realizar o login na sua conta do Spotify. 💚
+Hoje tenho que liberar cada novo usuário manualmente na dashboard deles, ficando enviável deixar público no momento.
+Caso isso mude, colocarei o link do app em produção com acessos liberados aqui no repositório.💚
+
 
 
 

@@ -53,7 +53,7 @@ const Login: React.FC = () => {
             <a href={AUTH_URL}>Logue com o Spotify</a>
           </LoginBtn>
         </Info>
-        <img src={igor} alt="igor logo" />
+        <img src={igor} alt="igornj logo" />
       </LoginInfo>
     </LoginContainer>
   )

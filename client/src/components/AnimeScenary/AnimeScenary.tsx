@@ -12,6 +12,10 @@ const AnimeScenary = (uri: any) => {
     const { musicChanged, setgifAverageColor, setcomplementaryColor } = useContext(DataContext);
     const fac = new FastAverageColor();
 
+    const randomizer = (min = 0, max = 25): number => {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
     useEffect(() => {
         giphy.search('anime aesthetic', function (err: any, res: any) {
             //console.log(res);
@@ -30,15 +34,8 @@ const AnimeScenary = (uri: any) => {
         setRandomNumber(randomizer());
     }, [musicChanged]);
 
+
     useEffect(() => {
-        if (searchResults.length >= 0) {
-            getAverageColor();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [uri]);
-
-
-    const getAverageColor = (): void => {
         fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'simple' })
             .then(color => {
                 setgifAverageColor(color.rgb);
@@ -46,29 +43,23 @@ const AnimeScenary = (uri: any) => {
                 setcomplementaryColor(compColor.analogous());
             })
             .catch(e => {
-                console.error(e);
+                //console.error(e);
             });
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [uri]);
 
 
-    const randomizer = (min = 0, max = 25): number => {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    // if(searchResults){
-    //     fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'dominant' })
-    //     .then(color => {
-    //         setgifAverageColor(color.rgb);
-    //         const compColor = new complementaryColors(color.rgb);
-    //         setcomplementaryColor(compColor.complementary());
-    //     })
-    //     .catch(e => {
-    //         console.error(e);
-    //     });
+    // const getAverageColor = (): void => {
+    //     fac.getColorAsync(searchResults[randomNumber]?.url, { algorithm: 'simple' })
+    //         .then(color => {
+    //             setgifAverageColor(color.rgb);
+    //             const compColor = new complementaryColors(color.rgb);
+    //             setcomplementaryColor(compColor.analogous());
+    //         })
+    //         .catch(e => {
+    //             console.error(e);
+    //         });
     // }
-
-
-
 
 
     return (

@@ -19,10 +19,9 @@ const useAuth = (): string | undefined => {
             })
             .then(res => {
                 if (cancel) return
-                setAccessToken(res.data.accessToken)
-                setRefreshToken(res.data.refreshToken)
-                setExpiresIn(res.data.expiresIn)
-                //window.history.pushState({}, null, "/") 
+                setAccessToken(res.data.accessToken);
+                setRefreshToken(res.data.refreshToken);
+                setExpiresIn(res.data.expiresIn);
 
             })
             .catch((e) => {
