@@ -22,10 +22,10 @@ Esse é um projeto que utiliza a API do Spotify para músicas e uma API para ger
 - *Manter sessão do usuário sempre logada, refreshToken*
 
 ## Acesso
-Como é um projeto pessoal e com pouquissimos acessos, ainda não vale a pena solicitar uma extensão por parte da Spotify
+Como é um projeto pessoal e com pouquissimos acessos, ainda não vale a pena solicitar uma extensão por parte do Spotify
 para liberar as requisições para qualquer usuário.
 
-Hoje tenho que liberar cada novo usuário manualmente na dashboard deles, ficando enviável deixar público no momento.
+Hoje tenho que liberar cada novo usuário manualmente na dashboard deles, ficando inviável deixar público no momento.
 Caso isso mude, colocarei o link do app em produção com acessos liberados aqui no repositório.💚
 
 
